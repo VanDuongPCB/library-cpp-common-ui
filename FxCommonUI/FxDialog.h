@@ -17,6 +17,4 @@ protected:
 
 private:
     QObjectList GetChildWidgets();
-
-
 };

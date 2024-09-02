@@ -14,6 +14,9 @@ file(GLOB SOURCE_FILES *.cpp)
 file(GLOB UI_FILES *.ui)
 file(GLOB RESOURCE_FILES *.qrc)
 
+source_group("Header Files" FILES ${HEADER_FILES})
+source_group("Source Files" FILES ${SOURCE_FILES})
+source_group("Forms" FILES ${UI_FILES} ${RESOURCE_FILES})
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${UI_FILES} ${RESOURCE_FILES} )
 

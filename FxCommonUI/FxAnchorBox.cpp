@@ -38,8 +38,6 @@ bool FxAnchorBox::eventFilter( QObject* object, QEvent* event )
 void FxAnchorBox::UpdateTheme( const FxTheme& theme )
 {
     setStyleSheet( theme.GetStyleSheet() );
-
-    qDebug() << "==================================";
     QString className = metaObject()->className();
     QObjectList childs = children();
     for ( auto child : childs )
@@ -58,12 +56,7 @@ void FxAnchorBox::UpdateTheme( const FxTheme& theme )
         {
 
         }
-
-        qDebug() << "Child name = " << widgetId;
     }
-
-
-    qDebug() << "==================================";
 }
 
 void FxAnchorBox::SetAnchor( int left, int top, int right, int bottom )
@@ -91,13 +84,30 @@ void FxAnchorBox::AddWidget( QWidget* widget )
 
     int x = 0;
     int y = 0;
+    int padding = 10;
+    int newWidth = 0;
+    int newHeight = 0;
     for ( auto widget : m_widgets )
     {
         QSize wsize = widget->size();
         widget->setParent( this );
         widget->setGeometry( x, y, wsize.width(), wsize.height() );
-        x += wsize.width() + 5;
+        x += wsize.width() + padding;
+        
+
+        if ( wsize.height() > newHeight )
+            newHeight = wsize.height();
+
+        newWidth += wsize.width();
+        newWidth += padding;
     }
+
+    newWidth -= padding;
+
+    QRect geo = geometry();
+    geo.setSize( QSize( newWidth, newHeight ) );
+    setGeometry( geo );
+    UpdatePosition();
 }
 
 

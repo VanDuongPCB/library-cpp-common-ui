@@ -20,6 +20,7 @@ public:
 	const QString GetStyleSheet( const QString& className, const QString& objectName ) const;
 	const QString GetCustomStyleSheet( const QString& objectInfo ) const;
 	bool Load();
+
 private:
 	QString m_path;
 	QString m_name;
